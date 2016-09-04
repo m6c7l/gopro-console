@@ -410,9 +410,9 @@ vv() {
 fsMenu() {
 	clear
 	echo -e "\n Frame Rate (Video Resolutions)\n"
-	echo " 1.  25 (1080, 960, 720,     )"
-	echo " 2.  50 (1080, 960, 720, WVGA)"
-	echo " 3. 100 (           720, WVGA)"
+	echo " 1.  30 (1080, 960, 720,     )"
+	echo " 2.  60 (1080, 960, 720, WVGA)"
+	echo " 3. 120 (           720, WVGA)"
 	echo
 	echo -e " 0. Return\n"
 }
@@ -705,10 +705,10 @@ else # PREVIEW
 	  #echo "_GPHD_:1:0:2:0" > /dev/udp/10.5.5.9/8554
 
 	  # GoPro 3 (keep alive)
-	  curl -s -m 1 "http://10.5.5.9/bacpac/se?t=${PASS}" &>/dev/null
-	  sleep 1.5
-	  #curl -s -m 1 "http://10.5.5.9/camera/sx?t=${PASS}" &>/dev/null
+	  #curl -s -m 1 "http://10.5.5.9/bacpac/se?t=${PASS}" &>/dev/null
 	  #sleep 1.5
+	  curl -s -m 1 "http://10.5.5.9/camera/sx?t=${PASS}" &>/dev/null
+	  sleep 1.5
 
 	done
 
