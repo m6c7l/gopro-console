@@ -137,7 +137,7 @@ tm() {
 
 vmMenu() {
 	clear
-	echo -e "\n NTSC/PAL\n"
+	echo -e "\n Video Region\n"
 	echo " 1. NTSC"
 	echo " 2. PAL"
 	echo
@@ -245,7 +245,7 @@ setupMenu() {
 	echo " 1. LED"
 	echo " 2. Sound"
 	echo " 3. Default at Power Up"
-	echo " 4. NTSC/PAL"
+	echo " 4. Video Region"
 	echo " 5. Set Date and Time"
 	echo
 	echo -e " 0. Return\n"
@@ -409,10 +409,10 @@ vv() {
 
 fsMenu() {
 	clear
-	echo -e "\n Frame Rate (Video Resolutions)\n"
-	echo " 1.  30 (1080, 960, 720,     )"
-	echo " 2.  60 (1080, 960, 720, WVGA)"
-	echo " 3. 120 (           720, WVGA)"
+	echo -e "\n NTSC|PAL Frame Rate (Video Resolutions)\n"
+	echo " 1.  30| 25 (1080, 960, 720,     )"
+	echo " 2.  60| 50 (1080, 960, 720, WVGA)"
+	echo " 3. 120|100 (           720, WVGA)"
 	echo
 	echo -e " 0. Return\n"
 }
@@ -423,9 +423,9 @@ fs() {
 	fsMenu
 	read -p " > " choice
 	case ${choice} in
-		1) OPT="03"; command ;;
-		2) OPT="06"; command ;;
-		3) OPT="08"; command ;;
+		1) OPT="04"; command ;;
+		2) OPT="07"; command ;;
+		3) OPT="09"; command ;;
 		0) ;;
 		*) invalid; fs ;;
 	esac
@@ -514,7 +514,7 @@ bu() {
 tiMenu() {
 	clear
 	echo -e "\n Time Lapse\n"
-	echo " 1.  0,5s"
+	echo " 1.  0.5s"
 	echo " 2.  1s"
 	echo " 3.  2s"
 	echo " 4.  5s"
@@ -707,7 +707,7 @@ else # PREVIEW
 	  # GoPro 3 (keep alive)
 	  #curl -s -m 1 "http://10.5.5.9/bacpac/se?t=${PASS}" &>/dev/null
 	  #sleep 1.5
-	  curl -s -m 1 "http://10.5.5.9/camera/sx?t=${PASS}" &>/dev/null
+	  curl -s -m 1 "http://10.5.5.9/camera/se?t=${PASS}" &>/dev/null
 	  sleep 1.5
 
 	done
