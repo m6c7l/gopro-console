@@ -5,6 +5,30 @@
 # This script is licensed under the terms of the MIT license.
 #
 
+# CONTROL : LOCATE
+
+llMenu() {
+	clear
+	echo -e "\n Locate\n"
+	echo " 1. On"
+	echo " 2. Off"
+	echo
+	echo -e " 0. Return\n"
+}
+
+ll() {
+	CMD="LL"
+	local choice
+	llMenu
+	read -p " > " choice
+	case ${choice} in
+		1) OPT="01"; command ;;
+		2) OPT="00"; command ;;
+		0) ;;
+		*) invalid; ll ;;
+	esac
+}
+
 # CONTROL : RECORDING
 
 pwMenu() {
@@ -62,6 +86,7 @@ controlMenu() {
 	echo -e "\n Control\n"
 	echo " 1. Recording"
 	echo " 2. Power"
+	echo " 3. Locate"
 	echo
 	echo -e " 0. Return\n"
 }
@@ -75,6 +100,7 @@ control() {
 		case ${choice} in
 			1) sh ;;
 			2) pw ;;
+			3) ll ;;
 			0) break ;;
 			*) invalid ;;
 		esac
@@ -123,6 +149,36 @@ delete() {
 			*) invalid ;;
 		esac
 	done
+}
+
+# SETUP : MODE
+
+cmMenu() {
+	clear
+	echo -e "\n Mode\n"
+	echo " 1. Video"
+	echo " 2. Still"
+	echo " 3. Burst"
+	echo " 4. Time Lapse"
+	echo " 5. HDMI"
+	echo
+	echo -e " 0. Return\n"
+}
+
+cm() {
+	CMD="CM"
+	local choice
+	cmMenu
+	read -p " > " choice
+	case ${choice} in
+		1) OPT="00"; command ;;
+		2) OPT="01"; command ;;
+		3) OPT="02"; command ;;
+		4) OPT="03"; command ;;
+		5) OPT="05"; command ;;
+		0) ;;
+		*) invalid; cm ;;
+	esac
 }
 
 # SETUP : SET DATE AND TIME
@@ -243,10 +299,11 @@ setupMenu() {
 	clear
 	echo -e "\n Setup\n"
 	echo " 1. LED"
-	echo " 2. Sound"
+	echo " 2. Beep"
 	echo " 3. Default at Power Up"
 	echo " 4. Video Region"
 	echo " 5. Set Date and Time"
+	echo " 6. Mode"
 	echo
 	echo -e " 0. Return\n"
 }
@@ -263,6 +320,7 @@ setup() {
 			3) dm ;;
 			4) vm ;;
 			5) tm ;;
+			6) cm ;;
 			0) break ;;
 			*) invalid ;;
 		esac
@@ -409,10 +467,10 @@ vv() {
 
 fsMenu() {
 	clear
-	echo -e "\n NTSC|PAL Frame Rate (Video Resolutions)\n"
-	echo " 1.  30| 25 (1080, 960, 720,     )"
-	echo " 2.  60| 50 (1080, 960, 720, WVGA)"
-	echo " 3. 120|100 (           720, WVGA)"
+	echo -e "\n NTSC/PAL Frame Rate (Video Resolutions)\n"
+	echo " 1.  30/ 25 (1080, 960, 720,     )"
+	echo " 2.  60/ 50 (1080, 960, 720, WVGA)"
+	echo " 3. 120/100 (           720, WVGA)"
 	echo
 	echo -e " 0. Return\n"
 }
