@@ -16,9 +16,6 @@ Connect your GNU/Linux machine to the GoPro camera via Wi-Fi and run the desired
 
 ```bash
 ./gopro-hero3p-se.sh  # GoPro HERO3+ Silver Edition
-```
-
-```bash
 ./gopro-hero4-se.sh  # GoPro HERO4 Silver Edition
 ```
 
