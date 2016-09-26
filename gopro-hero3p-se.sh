@@ -5,6 +5,9 @@
 # This script is licensed under the terms of the MIT license.
 #
 
+RED='\033[0;41;30m'
+STD='\033[0;0;39m'
+
 # CONTROL : LOCATE
 
 llMenu() {
@@ -93,8 +96,7 @@ controlMenu() {
 
 control() {
 	local choice
-	while true
-	do
+	while true; do
 		controlMenu
 		read -p " > " choice
 		case ${choice} in
@@ -138,8 +140,7 @@ deleteMenu() {
 
 delete() {
 	local choice
-	while true
-	do
+	while true; do
 		deleteMenu
 		read -p " > " choice
 		case ${choice} in
@@ -310,8 +311,7 @@ setupMenu() {
 
 setup() {
 	local choice
-	while true
-	do
+	while true; do
 		setupMenu
 		read -p " > " choice
 		case ${choice} in
@@ -421,8 +421,7 @@ captureMenu() {
 
 capture() {
 	local choice
-	while true
-	do
+	while true; do
 		captureMenu
 		read -p " > " choice
 		case ${choice} in
@@ -618,8 +617,7 @@ cameraMenu() {
 
 camera() {
 	local choice
-	while true
-	do
+	while true; do
 		cameraMenu
 		read -p " > " choice
 		case ${choice} in
@@ -680,8 +678,7 @@ mainMenu() {
 main() {
 	APP="camera"
 	local choice
-	while true
-	do
+	while true; do
 		mainMenu
 		read -p " > " choice
 		case ${choice} in
@@ -701,7 +698,7 @@ main() {
 
 command() {
 	PARA=""
-	if [ ${OPT} ]; then
+	if [[ -n ${OPT} ]]; then
 		PARA="&p=%"${OPT}
 	fi
 	echo -ne $(curl -s -m 2 "http://10.5.5.9/${APP}/${CMD}?t=${PASS}${PARA}") | \
@@ -717,8 +714,6 @@ pause() {
 }
 
 invalid() {
-	RED='\033[0;41;30m'
-	STD='\033[0;0;39m'
 	echo -ne "\n ${RED}invalid${STD} " && sleep 1
 }
 
@@ -736,38 +731,23 @@ preview() {
 	pause
 }
 
-PASS=$(curl -s -m 4 "http://10.5.5.9/bacpac/sd" | sed -e "s/[\o0\o1\o2\o3\o4\o5\o6\o7\o10]//g")
-
-if [ ! ${PASS} ]; then
+PASS=$(curl -s -m 3 "http://10.5.5.9/bacpac/sd" | sed -e "s/[\o0\o1\o2\o3\o4\o5\o6\o7\o10]//g")
+if [[ -z ${PASS} ]]; then
 	echo "GoPro not connected!"
 	exit 1
 fi
 
-if [ $# -eq 0 ]; then
+if [[ $# == 0 ]]; then
 
 	trap '' SIGINT SIGQUIT SIGTSTP
 	main
 
 else # PREVIEW
 
-	# GoPro 4 (init stream)
-	#curl "http://10.5.5.9/gp/gpExec?t=${PASS}&p1=gpTsFeeder&a1=%22%22&c1=restart&p2=gpStream&a2=%22%22&c2=restart" &>/dev/null
-
-	# GoPro 3 (init stream)
-	#curl "http://10.5.5.9/camera/PV?t=${PASS}&p=%02" &>/dev/null
-
-	while [ true ]; do
-
-	  # GoPro 4 (keep alive)
-	  #sendip -p ipv4 -p udp -us 8554 -is xx.x.x.xxx -ud 8554 -d "_GPHD_:1:0:2:0" 10.5.5.9
-	  #echo "_GPHD_:1:0:2:0" > /dev/udp/10.5.5.9/8554
-
+	while true; do
 	  # GoPro 3 (keep alive)
-	  #curl -s -m 1 "http://10.5.5.9/bacpac/se?t=${PASS}" &>/dev/null
-	  #sleep 1.5
 	  curl -s -m 1 "http://10.5.5.9/camera/se?t=${PASS}" &>/dev/null
-	  sleep 1.5
-
+	  sleep 2.5
 	done
 
 fi
