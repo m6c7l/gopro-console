@@ -25,4 +25,4 @@ All content in this repository is licensed under the MIT License.
 
 ## Credits
 
-[KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Konrad Iturbe
+-    [KonradIT/goprowifihack](https://github.com/KonradIT/goprowifihack) - Konrad Iturbe
