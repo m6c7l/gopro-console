@@ -2,7 +2,7 @@
 
 #
 # Copyright (c) 2016, Manfred Constapel
-# This script is licensed under the terms of the MIT license.
+# This file is licensed under the terms of the MIT license.
 #
 
 RED='\033[0;41;30m'
