@@ -1288,7 +1288,7 @@ autoff() {
 
 setdat() {
 	PRE="command/setup/date_time?p="
-        SUF=$(printf "%02x%%%02x%%%02x%%%02x%%%02x%%%02x" $(date +%y_%m_%d_%H_%M_%S | sed 's/_/ /g'))
+        SUF=$(printf "%%%02x%%%02x%%%02x%%%02x%%%02x%%%02x" $(date +%y_%m_%d_%H_%M_%S | sed 's/_/ /g'))
         command
 	pause
 }
