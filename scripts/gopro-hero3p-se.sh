@@ -635,7 +635,7 @@ camera() {
 
 gpMediaList() {
 	echo
-	echo -ne $(curl -s -m 2 "http://10.5.5.9:8080/gp/gpMediaList") | \
+	echo -ne $(curl --noproxy "*" -s -m 2 "http://10.5.5.9:8080/gp/gpMediaList") | \
 		sed -e "s/\[{/\[{\n/g" | \
 		sed -e "s/\,{/,{\n/g" | \
 		sed -e "s/\"d\"/  \"d\"/g" | \
@@ -645,13 +645,13 @@ gpMediaList() {
 
 cv() {
 	echo
-	echo -ne $(curl -s -m 2 "http://10.5.5.9/camera/cv") | \
+	echo -ne $(curl --noproxy "*" -s -m 2 "http://10.5.5.9/camera/cv") | \
 		sed -e "s/[\o0\o1\o2\o3\o4\o5\o6\o7\o10]//g" | \
 		sed -e "s/[\o25]/\n/g" | \
 		sed -e 's/^[[:space:]]*//'
 	echo
 	echo
-	echo -ne $(curl -s -m 2  "http://10.5.5.9/bacpac/cv") | \
+	echo -ne $(curl --noproxy "*" -s -m 2  "http://10.5.5.9/bacpac/cv") | \
 		sed -e "s/[\o0\o1\o2\o3\o4\o5\o6\o7\o10]//g" | \
 		sed -e "s/[\o25]/\n/g" | \
 		sed -e 's/^[[:space:]]*//'
@@ -699,7 +699,7 @@ command() {
 	if [[ -n ${OPT} ]]; then
 		PARA="&p=%"${OPT}
 	fi
-	echo -ne $(curl -s -m 2 "http://10.5.5.9/${APP}/${CMD}?t=${PASS}${PARA}") | \
+	echo -ne $(curl --noproxy "*" -s -m 2 "http://10.5.5.9/${APP}/${CMD}?t=${PASS}${PARA}") | \
 		sed -e "s/[\o0\o1\o2\o3\o4\o5\o6\o7\o10]//g" | \
 		sed -e "s/[\o25]/\n/g" | \
 		sed -e 's/^[[:space:]]*//'
@@ -729,7 +729,7 @@ preview() {
 	pause
 }
 
-PASS=$(curl -s -m 3 "http://10.5.5.9/bacpac/sd" | sed -e "s/[\o0\o1\o2\o3\o4\o5\o6\o7\o10]//g")
+PASS=$(curl --noproxy "*" -s -m 3 "http://10.5.5.9/bacpac/sd" | sed -e "s/[\o0\o1\o2\o3\o4\o5\o6\o7\o10]//g")
 if [[ -z ${PASS} ]]; then
 	echo "GoPro not connected!"
 	exit 1
@@ -744,7 +744,7 @@ else # PREVIEW
 
 	while true; do
 	  # GoPro 3 (keep alive)
-	  curl -s -m 1 "http://10.5.5.9/camera/se?t=${PASS}" &>/dev/null
+	  curl --noproxy "*" -s -m 1 "http://10.5.5.9/camera/se?t=${PASS}" &>/dev/null
 	  sleep 2.5
 	done
 
